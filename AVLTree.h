@@ -21,6 +21,7 @@ class AVLTree {
 
     Node *root;
     Node *max;
+    Node *min;
     Node *iterator;
 
 
@@ -30,6 +31,7 @@ class AVLTree {
     int bf(Node *i);
     void balancePath(Node *current);
     void updateMax();
+    void updateMin();
     void postOrderDelete(Node* current);
 
 
@@ -61,7 +63,7 @@ AVLTree<T>::Node::Node(T key, Node *father) : father(father), lSon(nullptr), rSo
 
 
 template <class T>
-AVLTree<T>::AVLTree() : root(nullptr), max(nullptr){}
+AVLTree<T>::AVLTree() : root(nullptr), max(nullptr), min(nullptr){}
 
 
 
@@ -95,6 +97,7 @@ void AVLTree<T>::insert(T key){
     if(root == nullptr){
         root = new Node(key, nullptr);
         max = root;
+        min = root;
         return;
     }
 
@@ -124,11 +127,11 @@ void AVLTree<T>::insert(T key){
 
     //post insertion corrections
 
-    updateW(current);
 
     balancePath(current);
 
     updateMax();
+    updateMin();
 
 }
 
@@ -145,6 +148,7 @@ void AVLTree<T>::remove(T key){
         delete current;
         root = nullptr;
         max = nullptr;
+        min = nullptr;
         return;
     }
 
@@ -272,11 +276,13 @@ void AVLTree<T>::remove(T key){
         current = c;
     }
 
-    updateW(current);
 
     balancePath(current);
 
     updateMax();
+
+    updateMin();
+
 }
 
 
@@ -361,6 +367,17 @@ void AVLTree<T>::updateMax(){
 }
 
 
+template <class T>
+void AVLTree<T>::updateMin(){
+    Node *current = root;
+    if(current == nullptr) min = nullptr;
+    else{
+        while(current->rSon != nullptr){
+            current = current->rSon;
+        }
+        min = current;
+    }
+}
 
 
 template <class T>
@@ -388,6 +405,7 @@ T AVLTree<T>::getMax() const {
 
 template<class T>
 T AVLTree<T>::getNext() const {
+    if(iterator == min) return nullptr;
     if(iterator->rSon == nullptr && iterator->father->lSon == iterator) {
         iterator = iterator->father;
     } else if(iterator->rSon == nullptr) {
@@ -399,6 +417,7 @@ T AVLTree<T>::getNext() const {
             while(iterator->lSon != nullptr) iterator = iterator->lSon;
         }
     }
+    return iterator->key;
 }
 
 #endif //MUSIC_MANAGER_2_AVLRANKTREE_H
