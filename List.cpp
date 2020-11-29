@@ -30,9 +30,6 @@ StatusType List::remove(int key) {
     return FAILURE;
 }
 
-T List::get(int key) {
-    std::shared_ptr<Node> left = head->next;
-}
 
 List::Node::Node(int key):key(key), next(nullptr) {}
 

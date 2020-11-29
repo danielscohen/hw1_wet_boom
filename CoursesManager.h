@@ -9,6 +9,7 @@
 #include "Course.h"
 #include "StreamsList.h"
 #include "LectureKey.h"
+#include "CourseKey.h"
 
 /**
  * to erase
@@ -20,21 +21,21 @@ class CoursesManager {
 
     AVLTree<std::shared_ptr<LectureKey>> lectureTree;
     AVLTree<std::shared_ptr<CourseKey>> courseTree;
-    StreamsList streamsList;
+    AVLTree<std::shared_ptr<CourseKey>> zeroTimeTree;
 
 
 public:
 
 
-    StatusType addData(int courseID, int numOfSongs);
+    StatusType addCourse(int courseID, int numOfClasses);
 
-    StatusType removeData(int artistID);
+    StatusType removeCourse(int courseID);
 
-    StatusType addToSongCount(int artistID, int songID);
+    StatusType watchClass(int courseID, int classID);
 
-    StatusType getNumOfStreams (int artistID, int songID, int* streams);
+    StatusType timeViewed (int artistID, int songID, int* streams);
 
-    StatusType getRecommendedSongs (int numOfSongs, int *artists, int *songs);
+    StatusType getMostViewedClasses (int numOfSongs, int *artists, int *songs);
 
 };
 

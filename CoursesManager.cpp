@@ -10,11 +10,11 @@
 
 
 
-StatusType CoursesManager::addData(int courseID, int numOfSongs) {
+StatusType CoursesManager::addCourse(int courseID, int numOfSongs) {
     if (courseTree.get(courseID) == nullptr) {
         Course* course;
         try {
-            course = new Course(numOfSongs);
+            course = new Course(numOfClasses);
             try {
                 courseTree.insert(courseID, course);
             }
@@ -29,12 +29,12 @@ StatusType CoursesManager::addData(int courseID, int numOfSongs) {
 
 
 
-        if (streamsList.addArtistSongs(numOfSongs, courseID) == ALLOCATION_ERROR){
+        if (streamsList.addArtistSongs(numOfClasses, courseID) == ALLOCATION_ERROR){
             courseTree.remove(courseID);
             return ALLOCATION_ERROR;
         }
         else {
-            for (int i = 0; i < numOfSongs ; ++i) {
+            for (int i = 0; i < numOfClasses ; ++i) {
                 course->songsArray[i] = streamsList.getZeroStreams();
             }
             return SUCCESS;
@@ -43,41 +43,41 @@ StatusType CoursesManager::addData(int courseID, int numOfSongs) {
     else return FAILURE;
 }
 
-StatusType CoursesManager::removeData(int artistID){
-    if (courseTree.get(artistID) != nullptr) {
-        Course* artist = courseTree.get(artistID);
+StatusType CoursesManager::removeCourse(int courseID){
+    if (courseTree.get(courseID) != nullptr) {
+        Course* artist = courseTree.get(courseID);
         for (int i = 0; i < artist->numOfSongs ; ++i) {
-            streamsList.deleteArtistSongsTree(artist->songsArray[i], artistID);
+            streamsList.deleteArtistSongsTree(artist->songsArray[i], courseID);
         }
-        courseTree.remove(artistID);
+        courseTree.remove(courseID);
         return SUCCESS;
     }
     else return FAILURE;
 }
 
-StatusType CoursesManager::addToSongCount(int artistID, int songID) {
+StatusType CoursesManager::watchClass(int courseID, int classID) {
     /*std::cout << courseID << " " << lectureID;*/
-    if (courseTree.get(artistID) != nullptr) {
+    if (courseTree.get(courseID) != nullptr) {
 
-        Course* artist = courseTree.get(artistID);
+        Course* artist = courseTree.get(courseID);
 
 
-        if(songID >= artist->numOfSongs) return INVALID_INPUT;
-        StreamsList::StreamNode *prevNode = artist->songsArray[songID]->prev;
+        if(classID >= artist->numOfSongs) return INVALID_INPUT;
+        StreamsList::StreamNode *prevNode = artist->songsArray[classID]->prev;
 
         bool nodeRemoved = false;
-        if (streamsList.addStreamToSong(artist->songsArray[songID], songID, artistID, nodeRemoved)==ALLOCATION_ERROR){
+        if (streamsList.addStreamToSong(artist->songsArray[classID], classID, courseID, nodeRemoved) == ALLOCATION_ERROR){
             return ALLOCATION_ERROR;
         }
         else {
-            artist->songsArray[songID] = (nodeRemoved ? prevNode->next : prevNode->next->next);
+            artist->songsArray[classID] = (nodeRemoved ? prevNode->next : prevNode->next->next);
             return SUCCESS;
         }
     }
     else return FAILURE;
 }
 
-StatusType CoursesManager::getNumOfStreams (int artistID, int songID, int* streams){
+StatusType CoursesManager::timeViewed (int artistID, int songID, int* streams){
     if (courseTree.get(artistID) != nullptr) {
         Course* artist = courseTree.get(artistID);
         if(songID >= artist->numOfSongs) return INVALID_INPUT;
@@ -87,7 +87,7 @@ StatusType CoursesManager::getNumOfStreams (int artistID, int songID, int* strea
     else return FAILURE;
 }
 
-StatusType CoursesManager::getRecommendedSongs (int numOfSongs, int *artists, int *songs){
+StatusType CoursesManager::getMostViewedClasses (int numOfSongs, int *artists, int *songs){
     return streamsList.getRecommendedSongs(numOfSongs, artists, songs);
 }
 

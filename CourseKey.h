@@ -6,10 +6,13 @@
 #define MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
 
 
+#include "List.h"
+
 class CourseKey {
 public:
     int courseID;
     int numLectures;
+    List zeroTimeLectures;
     int* lectureArr;
 
     virtual ~CourseKey();
