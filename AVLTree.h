@@ -21,6 +21,7 @@ class AVLTree {
 
     Node *root;
     Node *max;
+    Node *iterator;
 
 
     Node* lRole(Node *current);
@@ -41,8 +42,8 @@ public:
     AVLTree();
 
     ~AVLTree();
+    T getNext() const;
     T get(T key) const;
-    T select(int rank) const;
     T getMax() const;
     void insert(T key);
     void remove(T key);
@@ -378,10 +379,6 @@ bool AVLTree<T>::isMember(T key) const {
     return false;
 }
 
-template<class T>
-T AVLTree<T>::select(int rank) const {
-    return selectRecursive(rank, root);
-}
 
 
 template<class T>
@@ -389,6 +386,19 @@ T AVLTree<T>::getMax() const {
     return max->key;
 }
 
-
+template<class T>
+T AVLTree<T>::getNext() const {
+    if(iterator->rSon == nullptr && iterator->father->lSon == iterator) {
+        iterator = iterator->father;
+    } else if(iterator->rSon == nullptr) {
+        while(iterator->father->rSon == iterator) iterator = iterator->father;
+        iterator = iterator->father;
+    } else {
+        iterator = iterator->rSon;
+        if(iterator->lSon != nullptr){
+            while(iterator->lSon != nullptr) iterator = iterator->lSon;
+        }
+    }
+}
 
 #endif //MUSIC_MANAGER_2_AVLRANKTREE_H
