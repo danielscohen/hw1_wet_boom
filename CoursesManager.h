@@ -5,7 +5,7 @@
 #ifndef MUSIC_MANAGER_MUSICMANAGER_H
 #define MUSIC_MANAGER_MUSICMANAGER_H
 
-#include "Artist.h"
+#include "Course.h"
 #include "StreamsList.h"
 /**
  * to erase
@@ -14,16 +14,16 @@ typedef int Song;
 
 
 
-class MusicManager {
+class CoursesManager {
 
-    AVLTree<Artist> artistTree;
+    AVLTree<Course> courseTree;
     StreamsList streamsList;
 
 
 public:
 
 
-    StatusType addData(int artistID, int numOfSongs);
+    StatusType addData(int courseID, int numOfSongs);
 
     StatusType removeData(int artistID);
 

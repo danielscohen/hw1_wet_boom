@@ -2,12 +2,12 @@
 // Created by meir_ on 13/05/2020.
 //
 
-#include "Artist.h"
+#include "Course.h"
 #include "StreamsList.h"
-Artist::Artist(int numOfSongs): numOfSongs(numOfSongs) {
+Course::Course(int numOfSongs): numOfSongs(numOfSongs) {
     songsArray = new StreamsList::StreamNode*[numOfSongs];
 }
 
-Artist::~Artist() {
+Course::~Course() {
     delete[] songsArray;
 }

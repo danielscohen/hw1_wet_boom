@@ -7,14 +7,14 @@
 
 #include "StreamsList.h"
 
-class Artist {
+class Course {
 
 public:
 
     int numOfSongs;
     StreamsList::StreamNode** songsArray;
-    explicit Artist(int numOfSongs);
-    ~Artist();
+    explicit Course(int numOfSongs);
+    ~Course();
 
 };
 

@@ -1,9 +1,9 @@
 //
-// Created by dcohe on 11/05/2020.
+// Created by dcohe on 11/06/2020.
 //
 
-#ifndef MUSIC_MANAGER_AVLTREE_H
-#define MUSIC_MANAGER_AVLTREE_H
+#ifndef MUSIC_MANAGER_2_AVLRANKTREE_H
+#define MUSIC_MANAGER_2_AVLRANKTREE_H
 
 template <class T>
 class AVLTree {
@@ -12,18 +12,15 @@ class AVLTree {
         Node *father;
         Node *lSon;
         Node *rSon;
-        int key;
-        T *data;
+        T key;
         int height;
 
-        Node(int key, T *data, Node *father);
-        ~Node();
+        Node(T key, Node *father);
+
     };
 
     Node *root;
-    Node *min;
-    Node *iterator;
-    int maxKey;
+    Node *max;
 
 
     Node* lRole(Node *current);
@@ -31,49 +28,39 @@ class AVLTree {
     int calcNewHeight(Node *i);
     int bf(Node *i);
     void balancePath(Node *current);
-    void updateMin();
-    void updateMaxKey();
+    void updateMax();
     void postOrderDelete(Node* current);
-    Node* recursiveFill(int begin,int end);
 
 
 
 
 
-        public:
+
+public:
 
     AVLTree();
 
     ~AVLTree();
-    T *get(int key) const;
-    void insert(int key, T *data);
-    void remove(int key);
-    T* getMin();
-    T* getNextBigger();
+    T get(T key) const;
+    T select(int rank) const;
+    T getMax() const;
+    void insert(T key);
+    void remove(T key);
     bool isEmpty() const;
-    void fill(int size);
+    bool isMember(T key) const;
 
 
-    void inorderIterate();
 
-    int getNextBiggerKey();
-
-    int getMinKey();
-
-    int getCurrentKey();
 };
 
 template <class T>
-AVLTree<T>::Node::Node(int key, T *data, Node *father) : father(father), lSon(nullptr), rSon(nullptr), key(key), data(data), height(0){}
+AVLTree<T>::Node::Node(T key, Node *father) : father(father), lSon(nullptr), rSon(nullptr), key(key),
+                                              height(0){}
 
 
-template <class T>
-AVLTree<T>::Node::~Node(){
-    if(data != nullptr) delete data;
-}
 
 template <class T>
-AVLTree<T>::AVLTree() : root(nullptr), min(nullptr), iterator(nullptr), maxKey(-1){}
+AVLTree<T>::AVLTree() : root(nullptr), max(nullptr){}
 
 
 
@@ -88,27 +75,25 @@ void AVLTree<T>::postOrderDelete(Node* current){
     postOrderDelete(current->lSon);
     postOrderDelete(current->rSon);
     delete current;
-    current = nullptr;
 }
 
 template <class T>
-T* AVLTree<T>::get(int key) const {
+T AVLTree<T>::get(T key) const {
     const Node *current = root;
     while(current != nullptr){
-        if(current->key == key) return current->data;
-        if(current->key > key) current = current->lSon;
+        if(*(current->key) == *key) return current->key;
+        if(*(current->key) > *key) current = current->lSon;
         else current = current->rSon;
     }
     return nullptr;
 }
 
 template <class T>
-void AVLTree<T>::insert(int key, T *data){
+void AVLTree<T>::insert(T key){
 
     if(root == nullptr){
-        root = new Node(key, data, nullptr);
-        min = root;
-        updateMaxKey();
+        root = new Node(key, nullptr);
+        max = root;
         return;
     }
 
@@ -117,14 +102,14 @@ void AVLTree<T>::insert(int key, T *data){
 //search for location and then insert node
     Node *current = root;
     while(1) {
-        if (current->key == key) return;
-        if (current->key > key && current->lSon == nullptr) {
-            current->lSon = new Node(key, data, current);
+        if (*(current->key) == *key) return;
+        if (*(current->key) > *key && current->lSon == nullptr) {
+            current->lSon = new Node(key, current);
             break;
-        } else if (current->key < key && current->rSon == nullptr) {
-            current->rSon = new Node(key, data, current);
+        } else if (*(current->key) < *key && current->rSon == nullptr) {
+            current->rSon = new Node(key, current);
             break;
-        } else if (current->key > key) {
+        } else if (*(current->key) > *key) {
             current = current->lSon;
         } else {
             current = current->rSon;
@@ -136,20 +121,21 @@ void AVLTree<T>::insert(int key, T *data){
 
 
 
- //post insertion corrections
+    //post insertion corrections
+
+    updateW(current);
 
     balancePath(current);
 
-    updateMin();
-    updateMaxKey();
+    updateMax();
 
 }
 
 template <class T>
-void AVLTree<T>::remove(int key){
+void AVLTree<T>::remove(T key){
     Node *current = root;
-    while(current != nullptr && current->key != key){
-        if(current->key > key) current = current->lSon;
+    while(current != nullptr && *(current->key) != *key){
+        if(*(current->key) > *key) current = current->lSon;
         else current = current->rSon;
     }
 
@@ -157,15 +143,14 @@ void AVLTree<T>::remove(int key){
     if (current == root && current->lSon == nullptr && current->rSon == nullptr) {
         delete current;
         root = nullptr;
-        min = nullptr;
-        maxKey = -1;
+        max = nullptr;
         return;
     }
 
 
     if(current->lSon == nullptr && current->rSon == nullptr){
         current = current->father;
-        if (current->lSon != nullptr && current->lSon->key == key) {
+        if (current->lSon != nullptr && *(current->lSon->key) == *key) {
             delete current->lSon;
             current->lSon = nullptr;
         } else {
@@ -173,15 +158,15 @@ void AVLTree<T>::remove(int key){
             current->rSon = nullptr;
         }
     } else if(current->lSon == nullptr && current == root) {
-            root = current->rSon;
-            delete current;
-            root->father = nullptr;
-            current = root;
+        root = current->rSon;
+        delete current;
+        root->father = nullptr;
+        current = root;
 
     } else if(current->lSon == nullptr) {
         Node *toRemove = current;
         current = current->father;
-        if (current->lSon->key == key) {
+        if (*(current->lSon->key) == *key) {
             current->lSon = toRemove->rSon;
             current->lSon->father = current;
         } else {
@@ -191,15 +176,15 @@ void AVLTree<T>::remove(int key){
         delete toRemove;
 
     } else if(current->rSon == nullptr && current == root) {
-            root = current->lSon;
-            delete current;
-            root->father = nullptr;
-            current = root;
+        root = current->lSon;
+        delete current;
+        root->father = nullptr;
+        current = root;
 
     } else if(current->rSon == nullptr) {
         Node *toRemove = current;
         current = current->father;
-        if (current->lSon->key == key) {
+        if (*(current->lSon->key) == *key) {
             current->lSon = toRemove->lSon;
             if(current->lSon != nullptr) current->lSon->father = current;
 
@@ -286,11 +271,11 @@ void AVLTree<T>::remove(int key){
         current = c;
     }
 
+    updateW(current);
 
     balancePath(current);
 
-    updateMin();
-    updateMaxKey();
+    updateMax();
 }
 
 
@@ -311,7 +296,7 @@ typename AVLTree<T>::Node* AVLTree<T>::lRole(Node *current){
     b->height = calcNewHeight(b);
     if(d == nullptr) root = b;
     return d;
- }
+}
 
 template <class T>
 typename AVLTree<T>::Node* AVLTree<T>::rRole(Node *current){
@@ -337,6 +322,7 @@ int AVLTree<T>::calcNewHeight(Node *i){
     return 1 + (i->lSon->height > i->rSon->height ? i->lSon->height : i->rSon->height);
 }
 
+
 template <class T>
 int AVLTree<T>::bf(Node *i){
     if (i->lSon == nullptr && i->rSon == nullptr) return 0;
@@ -352,7 +338,7 @@ void AVLTree<T>::balancePath(Node *current){
         if(bf(current) == 2 && bf(current->lSon) >= 0) current = lRole(current);
         else if (bf(current) == 2) {
             current = current->lSon;
-           current = lRole( rRole(current));
+            current = lRole( rRole(current));
         } else if (bf(current) == -2 && bf(current->rSon) <= 0) current = rRole(current);
         else if (bf(current) == -2){
             current=current->rSon;
@@ -362,119 +348,47 @@ void AVLTree<T>::balancePath(Node *current){
 }
 
 template <class T>
-void AVLTree<T>::updateMin(){
+void AVLTree<T>::updateMax(){
     Node *current = root;
-    if(current == nullptr) min = nullptr;
+    if(current == nullptr) max = nullptr;
     else{
         while(current->lSon != nullptr){
             current = current->lSon;
         }
-        min = current;
+        max = current;
     }
 }
 
-template <class T>
-T* AVLTree<T>::getMin(){
-    iterator = min;
-    return iterator->data;
-}
 
-template <class T>
-int AVLTree<T>::getMinKey(){
-    iterator = min;
-    return iterator->key;
-}
 
-template <class T>
-T* AVLTree<T>::getNextBigger(){
-    inorderIterate();
-    if(iterator == nullptr) return nullptr;
-    return iterator->data;
-}
-
-template <class T>
-int AVLTree<T>::getNextBiggerKey(){
-    inorderIterate();
-    if(iterator == nullptr) return -1;
-    return iterator->key;
-}
-
-template <class T>
-void AVLTree<T>::inorderIterate(){
-    if(iterator->key == maxKey) iterator = nullptr;
-    else if(iterator->rSon == nullptr && iterator->father->lSon == iterator) {
-        iterator = iterator->father;
-    } else if(iterator->rSon == nullptr) {
-        while(iterator->father->rSon == iterator) iterator = iterator->father;
-        iterator = iterator->father;
-    } else {
-        iterator = iterator->rSon;
-        if(iterator->lSon != nullptr){
-            while(iterator->lSon != nullptr) iterator = iterator->lSon;
-        }
-    }
-}
 
 template <class T>
 bool AVLTree<T>::isEmpty() const{
     return root == nullptr;
 }
 
-template <class T>
-void AVLTree<T>::updateMaxKey(){
-    Node *current = root;
-    if(current == nullptr) maxKey = -1;
-    else{
-        while(current->rSon != nullptr){
-            current = current->rSon;
-        }
-        maxKey = current->key;
+template<class T>
+bool AVLTree<T>::isMember(T key) const {
+    const Node *current = root;
+    while(current != nullptr){
+        if(*(current->key) == *key) return true;
+        if(*(current->key) > *key) current = current->lSon;
+        else current = current->rSon;
     }
+    return false;
 }
 
-template <class T>
-int AVLTree<T>::getCurrentKey(){
-    return iterator->key;
+template<class T>
+T AVLTree<T>::select(int rank) const {
+    return selectRecursive(rank, root);
 }
 
 
-
-
-template <class T>
-void AVLTree<T>::fill(int size){
-    int end = size - 1;
-    int begin = 0;
-    int mid = (end + begin) / 2;
-    root = new Node(mid, nullptr, nullptr);
-    Node* lChild = recursiveFill(begin, mid - 1);
-    Node* rChild = recursiveFill(mid + 1, end);
-    if(lChild != nullptr) lChild->father = root;
-    if(rChild != nullptr) rChild->father = root;
-    root->lSon = lChild;
-    root->rSon = rChild;
-    root->height = calcNewHeight(root);
-    updateMin();
-    updateMaxKey();
-
-}
-
-template <class T>
-typename AVLTree<T>::Node* AVLTree<T>::recursiveFill(int begin,int end){
-    if(end < begin) return nullptr;
-    if(end == begin) return new Node(begin, nullptr, nullptr);
-    int mid = (end + begin) / 2;
-    Node* parent = new Node(mid, nullptr, nullptr);
-    Node* lChild = recursiveFill(begin, mid - 1);
-    Node* rChild = recursiveFill(mid + 1, end);
-    if(lChild != nullptr) lChild->father = parent;
-    if(rChild != nullptr) rChild->father = parent;
-    parent->lSon = lChild;
-    parent->rSon = rChild;
-    parent->height = calcNewHeight(parent);
-    return parent;
-
+template<class T>
+T AVLTree<T>::getMax() const {
+    return max->key;
 }
 
 
 
-#endif //MUSIC_MANAGER_AVLTREE_H
+#endif //MUSIC_MANAGER_2_AVLRANKTREE_H
