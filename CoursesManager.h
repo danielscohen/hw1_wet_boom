@@ -5,18 +5,21 @@
 #ifndef MUSIC_MANAGER_MUSICMANAGER_H
 #define MUSIC_MANAGER_MUSICMANAGER_H
 
+#include <memory>
 #include "Course.h"
 #include "StreamsList.h"
+#include "LectureKey.h"
+
 /**
  * to erase
  */
-typedef int Song;
 
 
 
 class CoursesManager {
 
-    AVLTree<Course> courseTree;
+    AVLTree<std::shared_ptr<LectureKey>> lectureTree;
+    AVLTree<std::shared_ptr<CourseKey>> courseTree;
     StreamsList streamsList;
 
 

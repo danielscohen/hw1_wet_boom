@@ -44,9 +44,9 @@ public:
     AVLTree();
 
     ~AVLTree();
-    T getNext() const;
+    T getNext();
     T get(T key) const;
-    T getMax() const;
+    T getFirst();
     void insert(T key);
     void remove(T key);
     bool isEmpty() const;
@@ -399,12 +399,13 @@ bool AVLTree<T>::isMember(T key) const {
 
 
 template<class T>
-T AVLTree<T>::getMax() const {
+T AVLTree<T>::getFirst() {
+    iterator = max;
     return max->key;
 }
 
 template<class T>
-T AVLTree<T>::getNext() const {
+T AVLTree<T>::getNext(){
     if(iterator == min) return nullptr;
     if(iterator->rSon == nullptr && iterator->father->lSon == iterator) {
         iterator = iterator->father;
