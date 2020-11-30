@@ -63,25 +63,28 @@ StatusType CoursesManager::removeCourse(int courseID){
 }
 
 StatusType CoursesManager::watchClass(int courseID, int classID) {
-    /*std::cout << courseID << " " << lectureID;*/
-    if (courseTree.get(courseID) != nullptr) {
+    std::shared_ptr<CourseKey> course;
+    std::shared_ptr<CourseKey> key;
+    try {
+        key = std::make_shared<CourseKey>(CourseKey(courseID,0));
+    } catch (...) {return ALLOCATION_ERROR;}
 
-        Course* artist = courseTree.get(courseID);
+    course = courseTree.get(key);
+    if(course == nullptr) return FAILURE;
 
+    if(classID + 1 > course->numLectures) return INVALID_INPUT;
 
-        if(classID >= artist->numOfSongs) return INVALID_INPUT;
-        StreamsList::StreamNode *prevNode = artist->songsArray[classID]->prev;
+    if(course->lectureArr[classID] == 0) {
 
-        bool nodeRemoved = false;
-        if (streamsList.addStreamToSong(artist->songsArray[classID], classID, courseID, nodeRemoved) == ALLOCATION_ERROR){
-            return ALLOCATION_ERROR;
-        }
-        else {
-            artist->songsArray[classID] = (nodeRemoved ? prevNode->next : prevNode->next->next);
-            return SUCCESS;
-        }
     }
-    else return FAILURE;
+
+
+    try {
+        courseTree.insert(course);
+        zeroTimeTree.insert(zeroCourse);
+    } catch (...) {return ALLOCATION_ERROR;}
+    numClasses += numOfClasses;
+    return SUCCESS;
 }
 
 StatusType CoursesManager::timeViewed (int artistID, int songID, int* streams){
