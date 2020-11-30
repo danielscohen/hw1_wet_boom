@@ -12,7 +12,7 @@ public:
     int courseID;
     int time;
 
-    LectureKey(int songId, int artistId, int numStreams);
+    LectureKey(int lectureID, int courseID, int time);
 
     friend bool operator<(const LectureKey& lhs, const LectureKey& rhs);
     friend bool operator>(const LectureKey& lhs, const LectureKey& rhs);

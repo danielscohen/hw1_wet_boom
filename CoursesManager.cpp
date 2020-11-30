@@ -5,7 +5,6 @@
 #include <iostream>
 #include "CoursesManager.h"
 #include "AVLTree.h"
-#include "StreamsList.h"
 
 
 
@@ -30,15 +29,37 @@ StatusType CoursesManager::addCourse(int courseID, int numOfClasses) {
 }
 
 StatusType CoursesManager::removeCourse(int courseID){
-    if (courseTree.get(courseID) != nullptr) {
-        Course* artist = courseTree.get(courseID);
-        for (int i = 0; i < artist->numOfSongs ; ++i) {
-            streamsList.deleteArtistSongsTree(artist->songsArray[i], courseID);
+    std::shared_ptr<CourseKey> key;
+    std::shared_ptr<CourseKey> course;
+    std::shared_ptr<LectureKey> lecture;
+    try {
+        key = std::make_shared<CourseKey>(CourseKey(courseID,0));
+        lecture = std::make_shared<LectureKey>(LectureKey(0, courseID, 0));
+    } catch (...) {return ALLOCATION_ERROR;}
+
+    course = courseTree.get(key);
+    if(course == nullptr) return FAILURE;
+
+    bool zeroRemoved = false;
+
+    for(int i = 0; i < course->numLectures; i++){
+        lecture->lectureID = i;
+        lecture->time = course->lectureArr[i];
+        if(course->lectureArr[i] > 0) lectureTree.remove(lecture);
+        else if (!zeroRemoved) {
+            zeroTimeTree.remove(course);
+            zeroRemoved = true;
         }
-        courseTree.remove(courseID);
-        return SUCCESS;
+
     }
-    else return FAILURE;
+
+    numClasses -= course->numLectures;
+
+    courseTree.remove(course);
+
+
+    return SUCCESS;
+
 }
 
 StatusType CoursesManager::watchClass(int courseID, int classID) {

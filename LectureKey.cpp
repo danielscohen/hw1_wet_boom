@@ -24,8 +24,8 @@ bool operator!=(const LectureKey &lhs, const LectureKey &rhs) {
     return !(lhs == rhs);
 }
 
-LectureKey::LectureKey(int songId, int artistId, int numStreams) : lectureID(songId),
-                                                                   courseID(artistId),
-                                                                   time(numStreams) {}
+LectureKey::LectureKey(int lectureID, int courseID, int time) : lectureID(lectureID),
+                                                                courseID(courseID),
+                                                                time(time) {}
 
 
