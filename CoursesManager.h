@@ -9,6 +9,7 @@
 #include "LectureKey.h"
 #include "AVLTree.h"
 #include "CourseKey.h"
+#include "library.h"
 
 /**
  * to erase

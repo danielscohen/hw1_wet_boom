@@ -6,8 +6,7 @@
 #define MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
 
 
-#include "List.h"
-#include "cmake-build-debug/ArrayList.h"
+#include "ArrayList.h"
 
 class CourseKey {
 public:
