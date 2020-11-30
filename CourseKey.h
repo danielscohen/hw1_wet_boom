@@ -7,12 +7,13 @@
 
 
 #include "List.h"
+#include "cmake-build-debug/ArrayList.h"
 
 class CourseKey {
 public:
     int courseID;
     int numLectures;
-    List zeroTimeLectures;
+    ArrayList zeroTimeLectures;
     int* lectureArr;
 
     virtual ~CourseKey();

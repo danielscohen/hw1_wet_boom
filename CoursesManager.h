@@ -31,11 +31,11 @@ public:
 
     StatusType removeCourse(int courseID);
 
-    StatusType watchClass(int courseID, int classID);
+    StatusType watchClass(int courseID, int classID, int time);
 
-    StatusType timeViewed (int artistID, int songID, int* streams);
+    StatusType timeViewed (int courseID, int classID, int* timeViewed);
 
-    StatusType getMostViewedClasses (int numOfSongs, int *artists, int *songs);
+    StatusType getMostViewedClasses (int numOfClasses, int *courses, int *classes);
 
 };
 

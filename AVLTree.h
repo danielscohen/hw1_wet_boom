@@ -52,6 +52,7 @@ public:
     bool isEmpty() const;
     bool isMember(T key) const;
 
+    bool isLast() const;
 
 
 };
@@ -419,6 +420,11 @@ T AVLTree<T>::getNext(){
         }
     }
     return iterator->key;
+}
+
+template<class T>
+bool AVLTree<T>::isLast() const {
+    return iterator == min;
 }
 
 #endif //MUSIC_MANAGER_2_AVLRANKTREE_H
