@@ -20,7 +20,9 @@ bool operator!=(const CourseKey &lhs, const CourseKey &rhs) {
     return !(lhs == rhs);
 }
 
-CourseKey::CourseKey(int courseId, int numLec) : courseID(courseId), numLectures(numLec), lectureArr(new int[numLec]()) {}
+CourseKey::CourseKey(int courseId, int numLec) : courseID(courseId), numLectures(numLec), lectureArr(new int[numLec]()) {
+   for(int i = 0; i < numLec; i++) zeroTimeLectures.add(i);
+}
 
 CourseKey::~CourseKey() {
     delete [] lectureArr;

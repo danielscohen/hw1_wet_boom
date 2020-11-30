@@ -10,37 +10,23 @@
 
 
 
-StatusType CoursesManager::addCourse(int courseID, int numOfSongs) {
-    if (courseTree.get(courseID) == nullptr) {
-        Course* course;
-        try {
-            course = new Course(numOfClasses);
-            try {
-                courseTree.insert(courseID, course);
-            }
-            catch (...){
-                delete course;
-                throw;
-            }
-        }
-        catch (...){
-            return ALLOCATION_ERROR;
-        }
+StatusType CoursesManager::addCourse(int courseID, int numOfClasses) {
+    std::shared_ptr<CourseKey> course;
+    std::shared_ptr<CourseKey> zeroCourse;
+    try {
+       course = std::make_shared<CourseKey>(CourseKey(courseID,numOfClasses));
+    } catch (...) {return ALLOCATION_ERROR;}
+
+    if(courseTree.isMember(course)) return FAILURE;
+    zeroCourse = course;
 
 
-
-        if (streamsList.addArtistSongs(numOfClasses, courseID) == ALLOCATION_ERROR){
-            courseTree.remove(courseID);
-            return ALLOCATION_ERROR;
-        }
-        else {
-            for (int i = 0; i < numOfClasses ; ++i) {
-                course->songsArray[i] = streamsList.getZeroStreams();
-            }
-            return SUCCESS;
-        }
-    }
-    else return FAILURE;
+    try {
+        courseTree.insert(course);
+        zeroTimeTree.insert(zeroCourse);
+    } catch (...) {return ALLOCATION_ERROR;}
+    numClasses += numOfClasses;
+    return SUCCESS;
 }
 
 StatusType CoursesManager::removeCourse(int courseID){

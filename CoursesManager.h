@@ -7,7 +7,6 @@
 
 #include <memory>
 #include "Course.h"
-#include "StreamsList.h"
 #include "LectureKey.h"
 #include "CourseKey.h"
 
@@ -22,6 +21,7 @@ class CoursesManager {
     AVLTree<std::shared_ptr<LectureKey>> lectureTree;
     AVLTree<std::shared_ptr<CourseKey>> courseTree;
     AVLTree<std::shared_ptr<CourseKey>> zeroTimeTree;
+    int numClasses;
 
 
 public:
