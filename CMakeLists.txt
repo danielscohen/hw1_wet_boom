@@ -4,4 +4,4 @@ project(hw1_wet_boom)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(hw1_wet_boom main.cpp Course.cpp AVLTree.cpp CoursesManager.cpp Song.cpp StreamsList.cpp library.h LectureKey.cpp
-        CourseKey.cpp List.cpp cmake-build-debug/ArrayList.cpp cmake-build-debug/ArrayList.h)
+        CourseKey.cpp List.cpp ArrayList.cpp ArrayList.h library.cpp)

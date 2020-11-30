@@ -6,8 +6,8 @@
 #define MUSIC_MANAGER_MUSICMANAGER_H
 
 #include <memory>
-#include "Course.h"
 #include "LectureKey.h"
+#include "AVLTree.h"
 #include "CourseKey.h"
 
 /**
