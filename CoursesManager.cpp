@@ -13,8 +13,21 @@ StatusType CoursesManager::addCourse(int courseID, int numOfClasses) {
     std::shared_ptr<CourseKey> course;
     std::shared_ptr<CourseKey> zeroCourse;
     try {
-       course = std::make_shared<CourseKey>(CourseKey(courseID,numOfClasses));
+       course = std::shared_ptr<CourseKey>(new CourseKey(courseID,numOfClasses));
+//       for(int i = 0; i < numOfClasses; i++){
+//
+//           std::cout << course->zeroTimeLectures.arr[i].prev << " " <<  course->zeroTimeLectures.arr[i].next<< std::endl;
+//       }
+//        for (int i = course->zeroTimeLectures.getFirst(); i != -1; i = course->zeroTimeLectures.getNext()) {
+//            std::cout << course->zeroTimeLectures.getPrev() << " " << course->zeroTimeLectures.getNext2() << std::endl;
+//        }
     } catch (...) {return ALLOCATION_ERROR;}
+
+//    for (int i = course->zeroTimeLectures.getFirst(); i != -1; i = course->zeroTimeLectures.getNext()) {
+//        std::cout << course->zeroTimeLectures.getPrev() << " " << course->zeroTimeLectures.getNext2() << std::endl;
+//    }
+
+
 
     if(courseTree.isMember(course)) return FAILURE;
     zeroCourse = course;
@@ -33,8 +46,8 @@ StatusType CoursesManager::removeCourse(int courseID){
     std::shared_ptr<CourseKey> course;
     std::shared_ptr<LectureKey> lecture;
     try {
-        key = std::make_shared<CourseKey>(CourseKey(courseID,0));
-        lecture = std::make_shared<LectureKey>(LectureKey(0, courseID, 0));
+        key = std::shared_ptr<CourseKey>(new CourseKey(courseID,1));
+        lecture = std::shared_ptr<LectureKey>(new LectureKey(0, courseID, 0));
     } catch (...) {return ALLOCATION_ERROR;}
 
     course = courseTree.get(key);
@@ -67,8 +80,8 @@ StatusType CoursesManager::watchClass(int courseID, int classID, int time) {
     std::shared_ptr<CourseKey> key;
     std::shared_ptr<LectureKey> lecture;
     try {
-        key = std::make_shared<CourseKey>(CourseKey(courseID,0));
-        lecture = std::make_shared<LectureKey>(LectureKey(classID, courseID, time));
+        key = std::shared_ptr<CourseKey>(new CourseKey(courseID,1));
+        lecture = std::shared_ptr<LectureKey>(new LectureKey(classID, courseID, time));
     } catch (...) {return ALLOCATION_ERROR;}
 
     course = courseTree.get(key);
@@ -98,7 +111,7 @@ StatusType CoursesManager::timeViewed (int courseID, int classID, int* timeViewe
     std::shared_ptr<CourseKey> course;
     std::shared_ptr<CourseKey> key;
     try {
-        key = std::make_shared<CourseKey>(CourseKey(courseID,0));
+        key = std::shared_ptr<CourseKey>(new CourseKey(courseID,1));
     } catch (...) {return ALLOCATION_ERROR;}
 
     course = courseTree.get(key);

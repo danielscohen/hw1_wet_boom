@@ -4,7 +4,7 @@
 
 #include "ArrayList.h"
 
-ArrayList::ArrayList(int size) : arr(new Node[size]), head(0), iterator(0), isEmpty(false) {
+ArrayList::ArrayList(int size) :arr(new Node[size]), head(0), iterator(0), isEmpty(false) {
     arr[0].prev = -1;
     arr[0].next = 1;
     arr[size - 1].next = -1;
@@ -17,9 +17,6 @@ ArrayList::ArrayList(int size) : arr(new Node[size]), head(0), iterator(0), isEm
     }
 }
 
-ArrayList::~ArrayList() {
-    delete [] arr;
-}
 
 int ArrayList::getFirst() {
     iterator = head;
@@ -46,5 +43,21 @@ void ArrayList::remove(int index) {
 
 bool ArrayList::isTail() {
     return arr[iterator].next == -1;
+}
+
+int ArrayList::getPrev() {
+    return arr[iterator].prev;
+}
+
+int ArrayList::getNext2() {
+    return arr[iterator].next;
+}
+
+ArrayList::~ArrayList() {
+    delete[] arr;
+}
+
+void ArrayList::initZero() {
+
 }
 

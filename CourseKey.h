@@ -5,7 +5,7 @@
 #ifndef MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
 #define MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
 
-
+#include <iostream>
 #include "ArrayList.h"
 
 class CourseKey {
