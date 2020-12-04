@@ -125,6 +125,7 @@ StatusType CoursesManager::timeViewed (int courseID, int classID, int* timeViewe
 
 StatusType CoursesManager::getMostViewedClasses (int numOfClasses, int *courses, int *classes){
     if(numOfClasses > numClasses) return FAILURE;
+
     int count = 0;
     for (std::shared_ptr<LectureKey> lecture = lectureTree.getFirst(); lecture != nullptr; lecture = lectureTree.getNext()) {
         courses[count] = lecture->courseID;

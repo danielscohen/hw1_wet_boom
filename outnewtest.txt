@@ -1,0 +1,233 @@
+init done.
+WatchClass: FAILURE
+RemoveCourse: INVALID_INPUT
+RemoveCourse: FAILURE
+GetMostViewedClasses: FAILURE
+WatchClass: FAILURE
+GetMostViewedClasses: FAILURE
+RemoveCourse: FAILURE
+RemoveCourse: INVALID_INPUT
+AddCourse: SUCCESS
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+4	||	0
+4	||	1
+4	||	2
+4	||	3
+4	||	4
+4	||	5
+4	||	6
+4	||	7
+--End of lecture list--
+WatchClass: FAILURE
+GetMostViewedClasses: FAILURE
+WatchClass: INVALID_INPUT
+AddCourse: SUCCESS
+AddCourse: FAILURE
+RemoveCourse: FAILURE
+WatchClass: INVALID_INPUT
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+2	||	0
+4	||	0
+2	||	1
+4	||	1
+2	||	2
+4	||	2
+2	||	3
+4	||	3
+2	||	4
+4	||	4
+2	||	5
+4	||	5
+2	||	6
+4	||	6
+2	||	7
+--End of lecture list--
+RemoveCourse: INVALID_INPUT
+TimeViewed: FAILURE
+WatchClass: FAILURE
+TimeViewed: FAILURE
+TimeViewed: FAILURE
+RemoveCourse: INVALID_INPUT
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+2	||	0
+4	||	0
+2	||	1
+4	||	1
+2	||	2
+--End of lecture list--
+AddCourse: SUCCESS
+AddCourse: SUCCESS
+WatchClass: INVALID_INPUT
+RemoveCourse: SUCCESS
+TimeViewed: INVALID_INPUT
+WatchClass: INVALID_INPUT
+AddCourse: FAILURE
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+5	||	0
+1	||	1
+2	||	1
+--End of lecture list--
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+5	||	0
+--End of lecture list--
+GetMostViewedClasses: INVALID_INPUT
+TimeViewed: FAILURE
+WatchClass: INVALID_INPUT
+RemoveCourse: FAILURE
+WatchClass: INVALID_INPUT
+WatchClass: INVALID_INPUT
+GetMostViewedClasses: INVALID_INPUT
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+5	||	0
+1	||	1
+2	||	1
+5	||	1
+1	||	2
+2	||	2
+5	||	2
+1	||	3
+2	||	3
+5	||	3
+1	||	4
+2	||	4
+--End of lecture list--
+RemoveCourse: FAILURE
+RemoveCourse: FAILURE
+GetMostViewedClasses: INVALID_INPUT
+TimeViewed: FAILURE
+GetMostViewedClasses: INVALID_INPUT
+AddCourse: FAILURE
+RemoveCourse: FAILURE
+GetMostViewedClasses: INVALID_INPUT
+TimeViewed: INVALID_INPUT
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+5	||	0
+1	||	1
+2	||	1
+5	||	1
+1	||	2
+2	||	2
+5	||	2
+1	||	3
+2	||	3
+--End of lecture list--
+TimeViewed: FAILURE
+TimeViewed: FAILURE
+WatchClass: INVALID_INPUT
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+5	||	0
+1	||	1
+--End of lecture list--
+WatchClass: INVALID_INPUT
+RemoveCourse: INVALID_INPUT
+WatchClass: INVALID_INPUT
+TimeViewed: INVALID_INPUT
+RemoveCourse: FAILURE
+AddCourse: FAILURE
+RemoveCourse: INVALID_INPUT
+RemoveCourse: FAILURE
+TimeViewed: FAILURE
+TimeViewed: INVALID_INPUT
+AddCourse: INVALID_INPUT
+RemoveCourse: SUCCESS
+WatchClass: INVALID_INPUT
+RemoveCourse: FAILURE
+WatchClass: INVALID_INPUT
+TimeViewed: FAILURE
+RemoveCourse: FAILURE
+AddCourse: FAILURE
+WatchClass: INVALID_INPUT
+AddCourse: INVALID_INPUT
+WatchClass: FAILURE
+TimeViewed: INVALID_INPUT
+RemoveCourse: FAILURE
+GetMostViewedClasses: INVALID_INPUT
+AddCourse: INVALID_INPUT
+AddCourse: INVALID_INPUT
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+1	||	1
+--End of lecture list--
+RemoveCourse: FAILURE
+GetMostViewedClasses: INVALID_INPUT
+AddCourse: SUCCESS
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+10	||	0
+1	||	1
+2	||	1
+10	||	1
+1	||	2
+2	||	2
+10	||	2
+1	||	3
+2	||	3
+10	||	3
+1	||	4
+2	||	4
+--End of lecture list--
+TimeViewed: FAILURE
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+--End of lecture list--
+TimeViewed: INVALID_INPUT
+TimeViewed: 0
+AddCourse: INVALID_INPUT
+TimeViewed: FAILURE
+AddCourse: INVALID_INPUT
+WatchClass: INVALID_INPUT
+WatchClass: FAILURE
+AddCourse: SUCCESS
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+2	||	0
+4	||	0
+10	||	0
+1	||	1
+2	||	1
+4	||	1
+10	||	1
+1	||	2
+2	||	2
+--End of lecture list--
+RemoveCourse: SUCCESS
+GetMostViewedClasses: SUCCESS
+Course	||	Class
+1	||	0
+4	||	0
+10	||	0
+1	||	1
+4	||	1
+10	||	1
+1	||	2
+4	||	2
+10	||	2
+1	||	3
+4	||	3
+10	||	3
+--End of lecture list--
+quit done.

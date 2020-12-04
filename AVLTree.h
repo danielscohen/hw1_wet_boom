@@ -402,6 +402,7 @@ bool AVLTree<T>::isMember(T key) const {
 template<class T>
 T AVLTree<T>::getFirst() {
     iterator = max;
+    if(max == nullptr) return nullptr;
     return max->key;
 }
 
