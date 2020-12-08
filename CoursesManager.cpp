@@ -85,9 +85,10 @@ StatusType CoursesManager::watchClass(int courseID, int classID, int time) {
     } catch (...) {return ALLOCATION_ERROR;}
 
     course = courseTree.get(key);
-    if(course == nullptr) return FAILURE;
 
-    if(classID + 1 > course->numLectures) return INVALID_INPUT;
+    if(course != nullptr && classID + 1 > course->numLectures) return INVALID_INPUT;
+
+    if(course == nullptr) return FAILURE;
 
     if(course->lectureArr[classID] == 0) {
         course->zeroTimeLectures.remove(classID);
@@ -115,9 +116,8 @@ StatusType CoursesManager::timeViewed (int courseID, int classID, int* timeViewe
     } catch (...) {return ALLOCATION_ERROR;}
 
     course = courseTree.get(key);
+    if(course != nullptr && classID + 1 > course->numLectures) return INVALID_INPUT;
     if(course == nullptr) return FAILURE;
-
-    if(classID + 1 > course->numLectures) return INVALID_INPUT;
 
     *timeViewed = course->lectureArr[classID];
     return SUCCESS;

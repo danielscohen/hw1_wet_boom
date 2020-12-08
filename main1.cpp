@@ -253,29 +253,26 @@ static errorType OnTimeViewed(void* DS, const char* const command) {
 
 static errorType OnGetMostViewedClasses(void* DS, const char* const command) {
     int numOfClasses;
-    int *courses, *classes;
-    StatusType res;
+    int *courses = NULL, *classes = NULL;
+	StatusType res = SUCCESS;
 
 	ValidateRead(sscanf(command, "%d", &numOfClasses), 1, "%s failed.\n", commandStr[GETMOSTVIEWEDCLASSES_CMD]);
 	if (numOfClasses > 0) {
 		courses = (int *)malloc(numOfClasses * sizeof(int));
 		classes = (int *)malloc(numOfClasses * sizeof(int));
-        if (courses != NULL && classes != NULL) {
-            res = GetMostViewedClasses(DS, numOfClasses, courses, classes);
-        }
-        else {
-            res = ALLOCATION_ERROR;
-        }
+		if (courses == NULL || classes == NULL) {
+		res = ALLOCATION_ERROR;
+		}
 	}
 
-    else res = GetMostViewedClasses(DS, numOfClasses, nullptr, nullptr);
+	if (res != ALLOCATION_ERROR) {
+		res = GetMostViewedClasses(DS, numOfClasses, courses, classes);
+	}
 
     if (res != SUCCESS) {
         printf("%s: %s\n", commandStr[GETMOSTVIEWEDCLASSES_CMD], ReturnValToStr(res));
-        if (numOfClasses > 0) {
-            if (courses != NULL) free(courses);
-            if (classes != NULL) free(classes);
-        }
+		if (courses != NULL) free(courses);
+		if (classes != NULL) free(classes);
         return error_free;
     }
 

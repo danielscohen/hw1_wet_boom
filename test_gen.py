@@ -66,10 +66,10 @@ def WatchClass():
     outLine = "WatchClass: "
     if courseID <= 0 or classID < 0 or time <= 0:
         outLine += INVALID_INPUT
+    elif courseID in courses.keys() and classID + 1 > len(courses[courseID]):
+        outLine += INVALID_INPUT
     elif courseID not in courses.keys():
         outLine += FAILURE
-    elif classID + 1 > len(courses[courseID]):
-        outLine += INVALID_INPUT
     else:
         courses[courseID][classID] += time
         for i in range(len(lectures)):
@@ -86,10 +86,10 @@ def TimeViewed():
     outLine = "TimeViewed: "
     if courseID <= 0 or classID < 0:
         outLine += INVALID_INPUT
+    elif courseID in courses.keys() and classID + 1 > len(courses[courseID]):
+        outLine += INVALID_INPUT
     elif courseID not in courses.keys():
         outLine += FAILURE
-    elif classID + 1 > len(courses[courseID]):
-        outLine += INVALID_INPUT
     else:
         outLine += "%d" %(courses[courseID][classID])
     return inLine, outLine
