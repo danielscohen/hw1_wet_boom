@@ -1,6 +1,3 @@
-//
-// Created by dcohe on 30/11/2020.
-//
 #include "library.h"
 #include "CoursesManager.h"
 

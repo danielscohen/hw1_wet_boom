@@ -1,9 +1,6 @@
-//
-// Created by dcohe on 11/06/2020.
-//
 
-#ifndef MUSIC_MANAGER_2_ALLSONGSBYSTREAMSKEY_H
-#define MUSIC_MANAGER_2_ALLSONGSBYSTREAMSKEY_H
+#ifndef BOOM_LECTURE_KEY_H
+#define BOOM_LECTURE_KEY_H
 
 
 class LectureKey {
@@ -21,4 +18,4 @@ public:
 };
 
 
-#endif //MUSIC_MANAGER_2_ALLSONGSBYSTREAMSKEY_H
+#endif //

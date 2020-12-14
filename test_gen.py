@@ -25,8 +25,8 @@ def initline():
 # AddLecture hour room_id course_id
 def AddCourse():
     global lectures, courses
-    courseID = random.randint(-3, 10)
-    numOfClasses = random.randint(-3, 20)
+    courseID = random.randint(-5, 80)
+    numOfClasses = random.randint(-5, 500)
     inLine = "AddCourse %d %d" % (courseID, numOfClasses)
     outLine = "AddCourse: "
     if courseID <= 0 or numOfClasses <= 0:
@@ -44,7 +44,7 @@ def AddCourse():
 # DeleteLecture hour room_id
 def RemoveCourse():
     global courses, lectures
-    courseID = random.randint(-5, 15)
+    courseID = random.randint(-5, 80)
     inLine = "RemoveCourse %d" % (courseID)
     outLine = "RemoveCourse: "
     if courseID <= 0:
@@ -59,9 +59,9 @@ def RemoveCourse():
 
 def WatchClass():
     global courses, lectures
-    courseID = random.randint(-5, 15)
-    classID = random.randint(-5, 15)
-    time = random.randint(-5, 15)
+    courseID = random.randint(-5, 80)
+    classID = random.randint(-5, 500)
+    time = random.randint(-5, 500)
     inLine = "WatchClass %d %d %d" % (courseID, classID, time)
     outLine = "WatchClass: "
     if courseID <= 0 or classID < 0 or time <= 0:
@@ -80,8 +80,8 @@ def WatchClass():
 
 def TimeViewed():
     global courses, lectures
-    courseID = random.randint(-5, 15)
-    classID = random.randint(-5, 15)
+    courseID = random.randint(-5, 80)
+    classID = random.randint(-5, 500)
     inLine = "TimeViewed %d %d" % (courseID, classID)
     outLine = "TimeViewed: "
     if courseID <= 0 or classID < 0:
@@ -96,7 +96,7 @@ def TimeViewed():
 
 def GetMostViewedClasses():
     global courses, lectures
-    numOfClasses = random.randint(-5, 15)
+    numOfClasses = random.randint(-5, 400)
     inLine = "GetMostViewedClasses %d" % (numOfClasses)
     outLine = "GetMostViewedClasses: "
     if numOfClasses <= 0:

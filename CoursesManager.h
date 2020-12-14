@@ -1,9 +1,6 @@
-//
-// Created by meir_ on 11/05/2020.
-//
 
-#ifndef MUSIC_MANAGER_MUSICMANAGER_H
-#define MUSIC_MANAGER_MUSICMANAGER_H
+#ifndef BOOM_COURSES_MANAGER_H
+#define BOOM_COURSES_MANAGER_H
 
 #include <memory>
 #include "LectureKey.h"
@@ -52,5 +49,5 @@ public:
 
 
 
-#endif //MUSIC_MANAGER_MUSICMANAGER_H
+#endif //BOOM_COURSES_MANAGER_H
 

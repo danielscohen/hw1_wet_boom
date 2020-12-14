@@ -1,9 +1,6 @@
-//
-// Created by dcohe on 11/06/2020.
-//
 
-#ifndef MUSIC_MANAGER_2_AVLRANKTREE_H
-#define MUSIC_MANAGER_2_AVLRANKTREE_H
+#ifndef BOOM_AVL_TREE_H
+#define BOOM_AVL_TREE_H
 
 template <class T>
 class AVLTree {
@@ -428,4 +425,4 @@ bool AVLTree<T>::isLast() const {
     return iterator == min;
 }
 
-#endif //MUSIC_MANAGER_2_AVLRANKTREE_H
+#endif // BOOM_AVL_TREE_H

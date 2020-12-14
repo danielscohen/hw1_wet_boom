@@ -1,9 +1,6 @@
-//
-// Created by dcohe on 11/06/2020.
-//
 
-#ifndef MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
-#define MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
+#ifndef BOOM_COURSE_KEY_H
+#define BOOM_COURSE_KEY_H
 
 #include <iostream>
 #include "ArrayList.h"
@@ -26,4 +23,4 @@ public:
 };
 
 
-#endif //MUSIC_MANAGER_2_ARTISTSONGSBYIDKEY_H
+#endif //

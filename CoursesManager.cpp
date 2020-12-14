@@ -1,6 +1,3 @@
-//
-// Created by meir_ on 11/05/2020.
-//
 
 #include <iostream>
 #include "CoursesManager.h"
